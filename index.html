@@ -19,12 +19,16 @@
                     <h1>Generador<span class="container__texto-azul"> de Contraseñas</span></h1>
                     <div class="container__campo"> 
                         <label class="texto__parrafo">Cantidad
-                            <input class="container__input" type="number" id="cantidad" >
+                            <input class="container__input" type="number" id="cantidad" placeholder="Ej: 12">
                         </label>
                         <button class="boton" id="generar" onclick="generarContrasena()" >Generar</button>
                     </div> 
                     <div class="container__campo">
                         <input class="container__contrasena" type="text" id="contrasena" placeholder="contraseña">
+                        <button class="boton" id="limpiar" onclick="limpiar()" hidden>Borrar</button>
+                    </div>
+                    <div class="container__campo">
+                        <span class="alert_span" id="mensaje"></span>
                     </div>
                 </div> 
             </div>

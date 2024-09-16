@@ -135,5 +135,7 @@ h1 {
     font-family: 'Inter', sans-serif;
 }
 
-
+.alert_span{
+    font-size: 32px;    
+}
 

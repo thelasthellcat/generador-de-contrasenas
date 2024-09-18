@@ -8,7 +8,7 @@ const caracteresOpciones = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
 function generarContrasena() {
 	let numeroDigitado = parseInt(cantidadInput.value);
 	if ( numeroDigitado<8 || !numeroDigitado) {
-		alert("Cantidad de caracteres es inferior a lo requerido");
+		mensajeSpan.innerHTML = "Ingrese una cantidad mayor a 8 caracteres";
 		return;
 	}
 	let contrasena = '';
@@ -23,9 +23,7 @@ function validarContraseña(contrasena) {
 	let validarNumeros = contrasena.match(/[0-9]/g) ?? false;
 	let validarMayus = contrasena.match(/[A-Z]/g) ?? false;
 	let validarCaracteresEspeciales = contrasena.match(/[!@#$%^&*()]/g) ?? false;
-	
-	let mensajeContrasenaFuerte = "";
-	let mensajeContrasenaDebil = "Insegura: su contraseña es debil. ";
+	let mensajeContrasenaDebil = "Contraseña Insegura: su contraseña es debil. ";
 	
 	if (validarNumeros==false) {
 		mensajeContrasenaDebil += "No tiene números. ";
@@ -36,28 +34,30 @@ function validarContraseña(contrasena) {
 	if (validarCaracteresEspeciales==false) {
 		mensajeContrasenaDebil += "No tiene caracteres especiales.";
 	}
-	contrasenaInput.value = contrasena;
-	mensajeSpan.innerHTML = mensajeContrasenaDebil;
-	cambiarBotonLimpiar(false);
+	if (validarCaracteresEspeciales == false || validarMayus == false || validarNumeros == false) {
+		contrasenaInput.value = contrasena;
+		mensajeSpan.innerHTML = mensajeContrasenaDebil;
+		cambiarEstadoBotonLimpiar(false);
+		return;
+	}
 
 	if ((contrasena.length >= 8) && (validarNumeros.length >= 1) && 
 		(validarMayus.length >= 1)&& (validarCaracteresEspeciales.length >= 1)) 
 	{
+		let mensajeContrasenaFuerte = "Contraseña Segura: Su contraseña es fuerte";
 		contrasenaInput.value = contrasena;
-		mensajeContrasenaFuerte += "Contraseña: Segura. Su contraseña es fuerte";
 		mensajeSpan.innerHTML = mensajeContrasenaFuerte;
-		cambiarBotonLimpiar(false);	
+		cambiarEstadoBotonLimpiar(false);	
 		return;
 	}
-		
 }
 
 function limpiar() {
 	cantidadInput.value = '';
 	contrasenaInput.value = '';
 	mensajeSpan.innerHTML = '';
-	cambiarBotonLimpiar(true);
+	cambiarEstadoBotonLimpiar(true);
 }
-function cambiarBotonLimpiar(interruptor) {
+function cambiarEstadoBotonLimpiar(interruptor) {
 	limpiarBoton.hidden = interruptor;
 }
